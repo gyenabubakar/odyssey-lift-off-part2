@@ -1,5 +1,9 @@
+const fs = require("fs");
 const { ApolloServer } = require('apollo-server');
-const typeDefs = require('./schema');
+
+const schema = fs.readFileSync(__dirname + '\\schema.graphql', {
+  encoding: 'utf8'
+})
 
 const mocks = {
   Query: () => ({
@@ -21,7 +25,7 @@ const mocks = {
 };
 
 const server = new ApolloServer({
-  typeDefs,
+  typeDefs: schema,
   mocks,
 });
 
